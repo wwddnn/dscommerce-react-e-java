@@ -4,14 +4,15 @@ import CatalogCard from "../../../components/CatalogCard";
 import ButtonNextPage from "../../../components/ButtonNextPage";
 import { useEffect, useState } from "react";
 import type { ProductDTO } from "../../../models/product";
-import axios from "axios";
+import * as productService from '../../../services/product-service';
 
 export default function Catalog() {
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
+  /* THE COMPONENT DONT KNOW THE AXIOS*/
   useEffect(() => {
-    axios.get("http://localhost:8080/products?size=12")
+    productService.findAll()
       .then(response => {
         setProducts(response.data.content);
       })

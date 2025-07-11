@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import type { ProductDTO } from '../../../models/product';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import * as productService from '../../../services/product-service';
 
 export default function ProductDetails() {
 
@@ -14,8 +14,9 @@ export default function ProductDetails() {
 
   const [product, setProduct] = useState<ProductDTO>();
 
+  /* THE COMPONENT DONT KNOW THE AXIOS*/
   useEffect(() => {
-    axios.get(`http://localhost:8080/products/${params.productId}`)
+    productService.findById(Number(params.productId))
       .then(response => {
         console.log(response.data);
         setProduct(response.data);
