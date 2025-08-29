@@ -10,8 +10,10 @@ export default function Catalog() {
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
+
   /* THE COMPONENT DONT KNOW THE AXIOS*/
   useEffect(() => {
+
     productService.findAll()
       .then(response => {
         setProducts(response.data.content);
