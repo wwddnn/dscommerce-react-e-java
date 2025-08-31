@@ -40,7 +40,10 @@ export default function ProductDetails() {
   return (
     <main>
       <section id="product-details-section" className="dsc-container">
-        {product && <ProductDetailsCard product={product} />}
+        {
+        product && 
+        <ProductDetailsCard product={product} />
+        }
         <div className="dsc-btn-page-container">
           <div onClick={handleBuyClick}>
             <ButtonPrimary text="Comprar" />

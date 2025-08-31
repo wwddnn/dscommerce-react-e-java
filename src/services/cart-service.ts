@@ -2,14 +2,20 @@ import { OrderItemDTO, type OrderDTO } from "../models/order";
 import * as cartRepository from "../localStorage/cart-repository";
 import type { ProductDTO } from "../models/product";
 
+/* !!! O cart-service sempre irá chamar o cart-repository !!! */
+
+
+/* função para salvar um produto no localStorage */
 export function saveCart(cart : OrderDTO) {
     cartRepository.save(cart);
 }
 
+/* função para pegar um produto do localStorage */
 export function getCart() : OrderDTO {
     return cartRepository.get();
 }
 
+/* função para adicionar um produto ao localStorage */
 export function addProduct(product: ProductDTO) {
     const cart = cartRepository.get();
     const item = cart.items.find(x => x.productId === product.id);
@@ -18,4 +24,9 @@ export function addProduct(product: ProductDTO) {
         cart.items.push(newItem);
         cartRepository.save(cart);
     }
+}
+
+/* função para limpar o carrinho do localStorage */
+export function clearCart() {
+    cartRepository.clear();
 }
