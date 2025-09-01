@@ -14,7 +14,7 @@ export default function Catalog() {
   /* THE COMPONENT DONT KNOW THE AXIOS*/
   useEffect(() => {
 
-    productService.findAll()
+    productService.findPageRequest(0, "ma")
       .then(response => {
         setProducts(response.data.content);
       })
