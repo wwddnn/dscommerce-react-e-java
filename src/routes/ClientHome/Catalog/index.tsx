@@ -10,20 +10,24 @@ export default function Catalog() {
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
-
+  const [productName, setProductName] = useState("");
   /* THE COMPONENT DONT KNOW THE AXIOS*/
   useEffect(() => {
 
-    productService.findPageRequest(0, "ma")
+    productService.findPageRequest(0, productName)
       .then(response => {
         setProducts(response.data.content);
       })
-  }, []);
+  }, [productName]);
+
+  function handleSearch(searchText: string) {
+    setProductName(searchText);
+  }
 
   return (
     <main>
       <section id="catalog-section" className="dsc-container">
-        <Searchbar />
+        <Searchbar onSearch={handleSearch} />
 
         <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
           {

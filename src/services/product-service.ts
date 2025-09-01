@@ -12,13 +12,9 @@ export function findPageRequest(page: number, name: string, size = 12, sort = "n
             name: name,
             size: size,
             sort: sort
-
         }
-
     }
-
     return axios(config);
-    
 }
 
 export function findById(id: number){
