@@ -1,7 +1,6 @@
 import axios, { type AxiosRequestConfig } from "axios";
 import { BASE_URL } from "../utils/system";
 
-/* two functions to search products from backend*/
 export function findPageRequest(page: number, name: string, size = 12, sort = "name" ) {
     const config : AxiosRequestConfig = {
         method: "GET",

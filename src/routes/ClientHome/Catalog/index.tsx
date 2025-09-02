@@ -4,20 +4,18 @@ import CatalogCard from "../../../components/CatalogCard";
 import ButtonNextPage from "../../../components/ButtonNextPage";
 import { useEffect, useState } from "react";
 import type { ProductDTO } from "../../../models/product";
-import * as productService from '../../../services/product-service';
+import * as productService from "../../../services/product-service";
 
 export default function Catalog() {
-
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
   const [productName, setProductName] = useState("");
-  /* THE COMPONENT DONT KNOW THE AXIOS*/
-  useEffect(() => {
 
+  useEffect(() => {
     productService.findPageRequest(0, productName)
-      .then(response => {
-        setProducts(response.data.content);
-      })
+    .then((response) => {
+      setProducts(response.data.content);
+    });
   }, [productName]);
 
   function handleSearch(searchText: string) {
@@ -31,10 +29,10 @@ export default function Catalog() {
 
         <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
           {
-            products.map(
-              product => <CatalogCard key={product.id} product={product} />
-            )
-          }  
+          products.map((product) => (
+            <CatalogCard key={product.id} product={product} />
+          ))
+          }
         </div>
 
         <ButtonNextPage />
