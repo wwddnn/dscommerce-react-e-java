@@ -20,7 +20,7 @@ export default function Searchbar({onSearch}: Props) {
 
   function handleResetClick() {
     setText("");
-    onSearch("");
+    onSearch(text);
   }
 
   return (

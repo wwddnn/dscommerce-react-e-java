@@ -8,8 +8,12 @@ import { ContextCartCount } from "./utils/context-cart";
 
 export default function App() {
 
+  /* Passo 3: Instanciar um useState no App tsx */
+  /* Vou prover na aplicação toda esse componente, todos vão poder usar esse dado aqui */
   const [contextCartCount, setContextCartCount] = useState<number>(0);
-
+  
+  
+  /* Passo 4: Prover o contexto globalmente usando método Provider */
   return (
     <ContextCartCount.Provider value={{contextCartCount, setContextCartCount}}>
       <BrowserRouter>
