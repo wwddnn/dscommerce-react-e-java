@@ -9,7 +9,7 @@ export default function Cart() {
 
   const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
 
-  /* Passo 5: Acessar o estado global nos componentes. Faz a desestruturação e usa o hook useContext */
+  /* Passo 5: Acessar o estado global nos componentes. Faz a desestruturação do que vai usar. usa o hook useContext */
   const { setContextCartCount } = useContext(ContextCartCount);
   
   function handleClearClick() {
@@ -24,13 +24,13 @@ export default function Cart() {
 
   function handleDecreaseItem(productId: number) {
     cartService.decreaseItem(productId);
-    updateCart()
+    updateCart();
   }
 
-  function updateCart() {
+  function updateCart() { // função criada para não repetir o código várias vezes acima
     const newCart = cartService.getCart();
     setCart(newCart);
-    setContextCartCount(newCart.items.length);
+    setContextCartCount(newCart.items.length); // muda o estado global com a quantidade de itens do carrinho
   }
 
   return (

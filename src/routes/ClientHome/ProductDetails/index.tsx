@@ -15,7 +15,7 @@ export default function ProductDetails() {
 
   const navigate = useNavigate();
 
-  /* Passo 5: Acessar o estado global nos componentes. Faz a desestruturação e usa o hook useContext */
+  /* Passo 5: Acessar o estado global nos componentes. Faz a desestruturação usando somente o que precisa. usa o hook useContext */
   const { setContextCartCount } = useContext(ContextCartCount);
 
   const [product, setProduct] = useState<ProductDTO>();
@@ -38,7 +38,7 @@ export default function ProductDetails() {
   function handleBuyClick() {
     if (product) {
       cartService.addProduct(product);
-      setContextCartCount(cartService.getCart().items.length);
+      setContextCartCount(cartService.getCart().items.length); // atualizando o estado global com a quantidade de itens do carrinho 
       navigate("/cart");
     }
   }
