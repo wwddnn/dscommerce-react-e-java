@@ -3,7 +3,7 @@ import * as cartRepository from "../localStorage/cart-repository";
 import type { ProductDTO } from "../models/product";
 
 /* !!! O cart-service sempre irá chamar o cart-repository !!! */
-
+// cart-service não faz requisições, ele só acessa o localstorage.
 
 /* função para salvar um produto no localStorage */
 export function saveCart(cart : OrderDTO) {
