@@ -1,12 +1,13 @@
+import type { AxiosRequestConfig } from "axios";
 import { requestBackend } from "../utils/request";
-import * as authService from "./auth-service";
 
+// findMe() é uma função de acesso a um recurso protegido do back end, por isso usamos withCredentials
 export function findMe() {
 
-    // cabeçalho
-    const headers = {
-        Authorization: "Bearer " + authService.getAccessToken()
+    const config : AxiosRequestConfig =  {
+        url: "/users/me",
+        withCredentials: true  
     }
 
-    return requestBackend({ url: `/users/me`, headers: headers });
+    return requestBackend(config);
 } 
