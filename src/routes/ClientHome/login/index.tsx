@@ -16,6 +16,7 @@ export default function Login() {
     event.preventDefault();
     authService.LoginRequest(formData)
       .then(response => {
+        authService.saveAccessToken(response.data.access_token); // salva o login no token
         console.log(response.data);
       })
       .catch(error => {
