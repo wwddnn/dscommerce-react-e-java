@@ -3,11 +3,12 @@ export type CredentialsDTO = {
   password: string;
 };
 
+// TIPO DO TOKEN
 export type AccessTokenPayloadDTO = {
   exp: number;
   user_name: string;
   authorities: RoleEnum[];
 };
 
-// definindo tipo enumerado em javascript
+// TIPO ENUMERADO EM JAVASCRIPT
 export type RoleEnum = "ROLE_ADMIN" | "ROLE_CLIENT";

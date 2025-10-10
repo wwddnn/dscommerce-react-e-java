@@ -1,5 +1,5 @@
 import QueryString from "qs";
-import type { AccessTokenPayloadDTO, CredentialsDTO } from "../models/auth";
+import type { AccessTokenPayloadDTO, CredentialsDTO, RoleEnum } from "../models/auth";
 import { CLIENT_ID, CLIENT_SECRET } from "../utils/system";
 import { requestBackend } from "../utils/request";
 import type { AxiosRequestConfig } from "axios";
@@ -57,9 +57,30 @@ export function getAccessTokenPayload(): AccessTokenPayloadDTO | undefined {
 }
 // verifica se usuario esta autenticado que é quando usuario esta com token ativo
 export function isAuthenticated(): boolean {
-  let tokenPayload = getAccessTokenPayload();
-  if(tokenPayload && tokenPayload.exp * 1000 > Date.now()) {
+  const tokenPayload = getAccessTokenPayload();
+  if (tokenPayload && tokenPayload.exp * 1000 > Date.now()) {
     return true;
+  }
+  return false;
+}
+
+// FUNCAO PARA VERIFICAR OS ROLES
+export function hasAnyRoles(roles: RoleEnum[]): boolean {
+  // SE ALISTA FOR VAZIA EU DIGO QUE É TRUE
+  if (roles.length === 0) {
+    return true;
+  }
+  // CHAMO O GETACCESSTOKENPAYLOAD PARA PEGAR O PAYLOAD DO TOKEN
+  const tokenPayload = getAccessTokenPayload();
+
+  // COMANDO FOR PERCORRE A LISTA DE ROLES QUE CHEGOU, E RETORNA TRUE CASO SEJA IGUAL
+  if (tokenPayload !== undefined) {
+    for (let i = 0; i < roles.length; i++) {
+      if (tokenPayload.authorities.includes(roles[i])) {
+        return true;
+      }
+    }
+    //return roles.some(role => tokenData.authorities.includes(role));
   }
   return false;
 }
