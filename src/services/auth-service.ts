@@ -42,6 +42,7 @@ export function getAccessToken(): string | null {
   return accessTokenRepository.get();
 }
 
+// decodifica o token
 export function getAccessTokenPayload(): AccessTokenPayloadDTO | undefined {
   try {
     const token = accessTokenRepository.get();
@@ -51,4 +52,13 @@ export function getAccessTokenPayload(): AccessTokenPayloadDTO | undefined {
   } catch (error) {
     return undefined;
   }
+}
+
+// verifica se o token é valido (se esta ativo na validade de expiração)
+export function isAuthenticated(): boolean {
+  let tokenPayload = getAccessTokenPayload();
+  if(tokenPayload && tokenPayload.exp * 1000 > Date.now()) {
+    return true;
+  }
+  return false;
 }
