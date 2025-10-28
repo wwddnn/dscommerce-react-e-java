@@ -1,6 +1,7 @@
-import './styles.css';
-import homeIcon from '../../assets/home.svg';
-import productsIcon from '../../assets/products.svg';
+import "./styles.css";
+import homeIcon from "../../assets/home.svg";
+import productsIcon from "../../assets/products.svg";
+
 
 export default function HeaderAdmin() {
   return (
