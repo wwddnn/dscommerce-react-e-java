@@ -20,7 +20,7 @@ export default function HeaderAdmin() {
               <p className="dsc-menu-item-active">Produtos</p>
             </div>
           </div>
-          <LoggedUser />
+         <LoggedUser />
         </div>
       </nav>
     </header>
