@@ -4,6 +4,7 @@ import { useState } from "react";
 type Props = {
   onSearch: Function;
 }
+
 export default function Searchbar({onSearch}: Props) {
 
   const [text, setText] = useState("");
