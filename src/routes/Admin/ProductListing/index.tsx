@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import type { ProductDTO } from '../../../models/product';
 import * as productService from '../../../services/product-service';
 import Searchbar from '../../../components/Searchbar';
+import DialogInfo from '../../../components/DialogInfo';
 
 type QueryParams = {
   page: number;
@@ -73,6 +74,7 @@ export default function ProductListing() {
         </table>
         <div className="dsc-btn-next-page">Carregar mais</div>
       </section>
+      <DialogInfo />
     </main>
   );
 }
