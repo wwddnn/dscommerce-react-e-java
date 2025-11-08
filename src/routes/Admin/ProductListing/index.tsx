@@ -6,6 +6,7 @@ import type { ProductDTO } from '../../../models/product';
 import * as productService from '../../../services/product-service';
 import Searchbar from '../../../components/Searchbar';
 import DialogInfo from '../../../components/DialogInfo';
+import ButtonNextPage from '../../../components/ButtonNextPage';
 
 type QueryParams = {
   page: number;
@@ -16,25 +17,29 @@ export default function ProductListing() {
 
   const [isLastPage, setIsLastPage] = useState();
     
-    const [products, setProducts] = useState<ProductDTO[]>([]);
+  const [products, setProducts] = useState<ProductDTO[]>([]);
     
-    const [queryParams, setQueryParams] = useState<QueryParams>({
-      page: 0,
-      name: ""
+  const [queryParams, setQueryParams] = useState<QueryParams>({
+    page: 0,
+    name: ""
     });
 
-    useEffect(() => {
-        productService.findPageRequest(queryParams.page, queryParams.name)
-        .then(response => {
-          const nextPage = response.data.content;
-          setProducts(products.concat(nextPage));
-          setIsLastPage(response.data.last);
-        });
-      }, [queryParams]);
+  useEffect(() => {
+      productService.findPageRequest(queryParams.page, queryParams.name)
+      .then(response => {
+        const nextPage = response.data.content;
+        setProducts(products.concat(nextPage));
+        setIsLastPage(response.data.last);
+      });
+  }, [queryParams]);
 
-    function handleSearch(searchText: string) {
-      setProducts([]);
-      setQueryParams({...queryParams, page: 0, name: searchText});
+  function handleSearch(searchText: string) {
+    setProducts([]);
+    setQueryParams({...queryParams, page: 0, name: searchText});
+  }
+
+  function handleNextPageClick() {
+    setQueryParams({...queryParams, page: queryParams.page + 1});
   }
 
   return (
@@ -72,9 +77,11 @@ export default function ProductListing() {
             }
           </tbody>
         </table>
-        <div className="dsc-btn-next-page">Carregar mais</div>
+        {
+          !isLastPage &&
+          <ButtonNextPage onNextPage={handleNextPageClick} />
+        }
       </section>
-      <DialogInfo />
     </main>
   );
 }
