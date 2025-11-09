@@ -384,7 +384,7 @@ nav a {
   align-items: center;
   border-radius: 5px;
   background-color: var(--dsc-color-card-bg);
-  padding: 20px;;
+  padding: 20px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -395,4 +395,8 @@ nav a {
   font-size: 20px;
   color: var(--dsc-color-font-primary);
   margin-bottom: 20px;
+}
+
+.dsc-dialog-btn-container {
+  width: 100%;
 }
