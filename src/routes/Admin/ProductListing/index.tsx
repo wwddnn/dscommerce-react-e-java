@@ -7,6 +7,7 @@ import * as productService from '../../../services/product-service';
 import Searchbar from '../../../components/Searchbar';
 import DialogInfo from '../../../components/DialogInfo';
 import ButtonNextPage from '../../../components/ButtonNextPage';
+import DialogConfirmation from '../../../components/DialogConfirmation';
 
 type QueryParams = {
   page: number;
@@ -18,6 +19,11 @@ export default function ProductListing() {
   const [dialogInfoData, setDialogInfoData] = useState({
     visible: false,
     message: "Operação com sucesso!"
+  });
+
+  const [dialogConfirmationData, setDialogConfirmationData] = useState({
+    visible: false,
+    message: "Tem certeza?"
   });
 
   const [isLastPage, setIsLastPage] = useState();
@@ -52,7 +58,12 @@ export default function ProductListing() {
   }
 
   function handleDeleteClick() {
-    setDialogInfoData({...dialogInfoData, visible: true});
+    setDialogConfirmationData({...dialogConfirmationData, visible: true});
+  }
+
+  function handleDialogConfirmationAnswer(answer: boolean) {
+    console.log("Resposta", answer);
+    setDialogConfirmationData({...dialogConfirmationData, visible: false});
   }
 
   return (
@@ -97,7 +108,17 @@ export default function ProductListing() {
       </section>
       {
         dialogInfoData.visible &&
-        <DialogInfo message={dialogInfoData.message} onDialogClose={handleDialogInfoClose} />
+        <DialogInfo 
+        message={dialogInfoData.message} 
+        onDialogClose={handleDialogInfoClose} 
+        />
+      }
+      {
+        dialogConfirmationData.visible &&
+        <DialogConfirmation 
+        message={dialogConfirmationData.message} 
+        onDialogAnswer={handleDialogConfirmationAnswer} 
+        />
       }
     </main>
   );
