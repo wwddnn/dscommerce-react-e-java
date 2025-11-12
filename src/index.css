@@ -403,3 +403,7 @@ nav a {
   grid-template-columns: 1fr 1fr; /* para ocupar duas metades um ao lado do outro */
   grid-gap: 20px;
 }
+
+.dsc-dialog-btn{
+  width: 100%;
+}
