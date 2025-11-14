@@ -8,6 +8,8 @@ import Searchbar from '../../../components/Searchbar';
 import DialogInfo from '../../../components/DialogInfo';
 import ButtonNextPage from '../../../components/ButtonNextPage';
 import DialogConfirmation from '../../../components/DialogConfirmation';
+import { Link } from 'react-router-dom';
+import ButtonInverse from '../../../components/ButtonInverse';
 
 type QueryParams = {
   page: number;
@@ -85,8 +87,10 @@ export default function ProductListing() {
     <main>
       <section id="product-listing-section" className="dsc-container">
         <h2 className="dsc-section-title dsc-mb20">Cadastro de produtos</h2>
-        <div className="dsc-btn-page-container dsc-mb20">
-          <div className="dsc-btn dsc-btn-white">Novo</div>
+        <div className="dsc-btn-page-container dsc-mb20" >
+          <Link to="/admin/products/create">
+            <ButtonInverse text="Novo"/>
+          </Link>
         </div>
         <Searchbar onSearch={handleSearch} />
         <table className="dsc-table dsc-mb20 dsc-mt20">
