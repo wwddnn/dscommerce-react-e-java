@@ -43,8 +43,9 @@ export default function ProductForm() {
     if (isEditing) {
       productService.findById(Number(params.productId))
         .then( response => {
-          console.log(response.data)
-        })
+          const newFormData = forms.updateAll(formData, response.data);
+          setFormData(newFormData);
+        });
     }
   }, []);
 
