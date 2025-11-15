@@ -21,3 +21,12 @@ export function updateAll(inputs: any, newValues: any) {
     }
     return newInputs;
 }
+
+export function validate(inputs: any, name: string) {
+
+    if(!inputs[name].validation) { // caso a função valitation não exista
+        return inputs;
+    }
+    const isInvalid = !inputs[name].validation(inputs[name].value);
+    return {...inputs, [name]: {...inputs[name], invalid: isInvalid.toString()}};
+}

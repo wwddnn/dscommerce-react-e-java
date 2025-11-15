@@ -20,11 +20,15 @@ export default function ProductForm() {
         placeholder: "Nome",
       },
       price: {
-        value: "", // valor é passado como zero no início
+        value: 200, // valor é passado como zero no início
         id: "price",
         name: "price",
         type: "number",
         placeholder: "Preço",
+        validation: function(value: any) {
+          return Number(value) > 0;
+        },
+        message: "Favor informar um valor positivo",
       },
       imgUrl: {
         value: "", // valor é passado como zero no início
@@ -40,6 +44,10 @@ export default function ProductForm() {
   }
 
   useEffect(() => {
+
+    const obj = forms.validate(formData, "price");
+    console.log(obj);
+
     if (isEditing) {
       productService.findById(Number(params.productId))
         .then( response => {
