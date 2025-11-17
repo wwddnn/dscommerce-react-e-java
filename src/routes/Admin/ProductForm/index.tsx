@@ -1,87 +1,87 @@
-import './styles.css';
-import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import FormInput from '../../../components/FormInput';
-import * as forms from '../../../utils/forms';
-import * as productService from '../../../services/product-service';
+import "./styles.css";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import FormInput from "../../../components/FormInput";
+import * as forms from "../../../utils/forms";
+import * as productService from "../../../services/product-service";
 
 export default function ProductForm() {
-
   const params = useParams();
 
-  const isEditing = params.productId !== 'create';
+  const isEditing = params.productId !== "create";
 
   const [formData, setFormData] = useState<any>({
-      name: {
-        value: "", // valor é passado como zero no início
-        id: "name",
-        name: "name",
-        type: "text",
-        placeholder: "Nome",
+    name: {
+      value: "", // valor é passado como zero no início
+      id: "name",
+      name: "name",
+      type: "text",
+      placeholder: "Nome",
+    },
+    price: {
+      value: "", // valor é passado como zero no início
+      id: "price",
+      name: "price",
+      type: "number",
+      placeholder: "Preço",
+      validation: function (value: any) {
+        return Number(value) > 0;
       },
-      price: {
-        value: 200, // valor é passado como zero no início
-        id: "price",
-        name: "price",
-        type: "number",
-        placeholder: "Preço",
-        validation: function(value: any) {
-          return Number(value) > 0;
-        },
-        message: "Favor informar um valor positivo",
-      },
-      imgUrl: {
-        value: "", // valor é passado como zero no início
-        id: "imgUrl",
-        name: "imgUrl",
-        type: "text",
-        placeholder: "Imagem",
-      },
+      message: "Favor informar um valor positivo",
+    },
+    imgUrl: {
+      value: "", // valor é passado como zero no início
+      id: "imgUrl",
+      name: "imgUrl",
+      type: "text",
+      placeholder: "Imagem",
+    },
   });
 
   function handleInputChange(event: any) {
-    setFormData(forms.update(formData, event.target.name, event.target.value));
+    const dataUpdated = forms.update(formData, event.target.name, event.target.value)
+    const dataValidated = forms.validate(dataUpdated, event.target.name);
+    setFormData(dataValidated);
   }
 
   useEffect(() => {
-
-    const obj = forms.validate(formData, "price");
-    console.log(obj);
-
     if (isEditing) {
-      productService.findById(Number(params.productId))
-        .then( response => {
-          const newFormData = forms.updateAll(formData, response.data);
-          setFormData(newFormData);
-        });
+      productService.findById(Number(params.productId)).then((response) => {
+        const newFormData = forms.updateAll(formData, response.data);
+        setFormData(newFormData);
+      });
     }
   }, []);
 
   return (
-    
     <main>
       <section id="product-form-section" className="dsc-container">
         <div className="dsc-product-form-container">
           <form className="dsc-card dsc-form">
             <h2>Dados do produto</h2>
             <div className="dsc-form-controls-container">
-
               <div>
                 <FormInput
                   {...formData.name}
                   className="dsc-form-control"
                   onChange={handleInputChange}
                 />
+                <div className="dsc-form-error" >
+                  {formData.name.message}
+                </div>
               </div>
-              
+
               <div>
                 <FormInput
                   {...formData.price}
                   className="dsc-form-control"
                   onChange={handleInputChange}
                 />
+                  <div className="dsc-form-error" >
+                    {formData.price.message}
+                  </div>
               </div>
-              
+
               <div>
                 <FormInput
                   {...formData.imgUrl}
@@ -93,14 +93,17 @@ export default function ProductForm() {
 
             <div className="dsc-product-form-buttons">
               <Link to="/admin/products">
-                <button type="reset" className="dsc-btn dsc-btn-white">Cancelar</button>
+                <button type="reset" className="dsc-btn dsc-btn-white">
+                  Cancelar
+                </button>
               </Link>
-              <button type="submit" className="dsc-btn dsc-btn-blue">Salvar</button>
+              <button type="submit" className="dsc-btn dsc-btn-blue">
+                Salvar
+              </button>
             </div>
           </form>
         </div>
       </section>
     </main>
-
   );
 }

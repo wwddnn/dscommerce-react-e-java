@@ -245,15 +245,22 @@ nav a {
   color: var(--dsc-color-font-placeholder);
 }
 
-.dsc-input-error {
+/* cria estilização para o campo do formulário que esta com erro de validação */
+.dsc-form-control[data-invalid="true"] {
   border: 1px solid var(--dsc-color-error);
+}
+
+.dsc-form-control[data-invalid="true"] ~ div {
+  display: unset;
 }
 
 .dsc-form-error {
   color: var(--dsc-color-error);
   font-size: 12px;
   padding-left: 4px;
+  display: none;
 }
+
 
 .dsc-select:invalid {
   color: var(--dsc-color-font-placeholder);
