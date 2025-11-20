@@ -34,3 +34,15 @@ export function validate(inputs: any, name: string) {
 export function toDirty(inputs: any, name: string) {
   return { ...inputs, [name]: { ...inputs[name], dirty: "true" } };
 }
+
+// função auxiliar // chama o update e o validate
+export function updateAndValidate(inputs: any, name: string, newValue: any) {
+  const dataUpdated = update(inputs, name, newValue);
+  return validate(dataUpdated, name);
+}
+
+// função auxiliar // chama o dirty e o validate
+export function dirtyAndValidate(inputs: any, name: string) {
+  const dataDirty = toDirty(inputs, name);
+  return validate(dataDirty, name);
+}
