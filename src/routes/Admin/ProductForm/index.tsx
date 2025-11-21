@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import FormInput from "../../../components/FormInput";
 import * as forms from "../../../utils/forms";
 import * as productService from "../../../services/product-service";
+import FormTextArea from "../../../components/FormTextArea";
 
 export default function ProductForm() {
   const params = useParams();
@@ -40,10 +41,23 @@ export default function ProductForm() {
       type: "text",
       placeholder: "Imagem",
     },
+    description: {
+      value: "", // valor é passado como zero no início
+      id: "description",
+      name: "description",
+      type: "text",
+      placeholder: "Descrição",
+      validation: function (value: string) {
+        return /^.{10,}$/.test(value);
+      },
+      message: "A descrição deve ter pelo menos 10 caracteres",
+    },
   });
 
   function handleInputChange(event: any) {
-    setFormData(forms.updateAndValidate(formData, event.target.name, event.target.value));
+    setFormData(
+      forms.updateAndValidate(formData, event.target.name, event.target.value)
+    );
   }
 
   function handleTurnDirty(name: string) {
@@ -65,6 +79,7 @@ export default function ProductForm() {
         <div className="dsc-product-form-container">
           <form className="dsc-card dsc-form">
             <h2>Dados do produto</h2>
+
             <div className="dsc-form-controls-container">
               <div>
                 <FormInput
@@ -73,9 +88,7 @@ export default function ProductForm() {
                   onTurnDirty={handleTurnDirty}
                   onChange={handleInputChange}
                 />
-                <div className="dsc-form-error" >
-                  {formData.name.message}
-                </div>
+                <div className="dsc-form-error">{formData.name.message}</div>
               </div>
 
               <div>
@@ -85,9 +98,7 @@ export default function ProductForm() {
                   onTurnDirty={handleTurnDirty}
                   onChange={handleInputChange}
                 />
-                  <div className="dsc-form-error" >
-                    {formData.price.message}
-                  </div>
+                <div className="dsc-form-error">{formData.price.message}</div>
               </div>
 
               <div>
@@ -98,8 +109,18 @@ export default function ProductForm() {
                   onChange={handleInputChange}
                 />
               </div>
-            </div>
 
+            <div>
+              <FormTextArea
+                {...formData.description}
+                className="dsc-form-control dsc-textarea"
+                onTurnDirty={handleTurnDirty}
+                onChange={handleInputChange}
+              />
+              <div className="dsc-form-error">{formData.description.message}</div>
+          </div>
+        </div>
+        
             <div className="dsc-product-form-buttons">
               <Link to="/admin/products">
                 <button type="reset" className="dsc-btn dsc-btn-white">
