@@ -5,11 +5,16 @@ import FormInput from "../../../components/FormInput";
 import * as forms from "../../../utils/forms";
 import * as productService from "../../../services/product-service";
 import FormTextArea from "../../../components/FormTextArea";
+import Select from 'react-select'
+import type { CategoryDTO } from "../../../models/category";
+import * as categoryService from '../../../services/category';
 
 export default function ProductForm() {
   const params = useParams();
 
   const isEditing = params.productId !== "create";
+
+  const [categories, setCategories] = useState<CategoryDTO[]>([]);
 
   const [formData, setFormData] = useState<any>({
     name: {
@@ -65,6 +70,13 @@ export default function ProductForm() {
   }
 
   useEffect(() => {
+    categoryService.findAllRequest()
+      .then(response => {
+        setCategories(response.data);
+      })
+  }, []);
+
+  useEffect(() => {
     if (isEditing) {
       productService.findById(Number(params.productId)).then((response) => {
         const newFormData = forms.updateAll(formData, response.data);
@@ -72,6 +84,12 @@ export default function ProductForm() {
       });
     }
   }, []);
+
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
 
   return (
     <main>
@@ -110,17 +128,28 @@ export default function ProductForm() {
                 />
               </div>
 
-            <div>
-              <FormTextArea
-                {...formData.description}
-                className="dsc-form-control dsc-textarea"
-                onTurnDirty={handleTurnDirty}
-                onChange={handleInputChange}
+              <div>
+                <Select 
+                options={categories} 
+                isMulti
+                getOptionLabel={(obj) => obj.name}
+                getOptionValue= {(obj) => String(obj.id)}
               />
-              <div className="dsc-form-error">{formData.description.message}</div>
-          </div>
-        </div>
-        
+              </div>
+
+              <div>
+                <FormTextArea
+                  {...formData.description}
+                  className="dsc-form-control dsc-textarea"
+                  onTurnDirty={handleTurnDirty}
+                  onChange={handleInputChange}
+                />
+                <div className="dsc-form-error">
+                  {formData.description.message}
+                </div>
+              </div>
+            </div>
+
             <div className="dsc-product-form-buttons">
               <Link to="/admin/products">
                 <button type="reset" className="dsc-btn dsc-btn-white">
