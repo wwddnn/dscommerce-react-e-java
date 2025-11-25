@@ -5,9 +5,9 @@ import FormInput from "../../../components/FormInput";
 import * as forms from "../../../utils/forms";
 import * as productService from "../../../services/product-service";
 import FormTextArea from "../../../components/FormTextArea";
-import Select from 'react-select'
 import type { CategoryDTO } from "../../../models/category";
-import * as categoryService from '../../../services/category';
+import * as categoryService from "../../../services/category";
+import FormSelect from "../../../components/FormSelect";
 
 export default function ProductForm() {
   const params = useParams();
@@ -34,8 +34,8 @@ export default function ProductForm() {
       name: "price",
       type: "number",
       placeholder: "Preço",
-      validation: function (value: any) {
-        return Number(value) > 0;
+      validation: function (value: number) {
+        return value > 0;
       },
       message: "Favor informar um valor positivo",
     },
@@ -57,6 +57,16 @@ export default function ProductForm() {
       },
       message: "A descrição deve ter pelo menos 10 caracteres",
     },
+    categories: {
+      value: [],
+      id: "categories",
+      name: "categories",
+      placeholder: "Categorias",
+      validation: function (value: CategoryDTO[]) {
+        return value.length > 0;
+      },
+      message: "Escolha ao menos uma categoria"
+    },
   });
 
   function handleInputChange(event: any) {
@@ -70,10 +80,9 @@ export default function ProductForm() {
   }
 
   useEffect(() => {
-    categoryService.findAllRequest()
-      .then(response => {
-        setCategories(response.data);
-      })
+    categoryService.findAllRequest().then((response) => {
+      setCategories(response.data);
+    });
   }, []);
 
   useEffect(() => {
@@ -85,12 +94,7 @@ export default function ProductForm() {
     }
   }, []);
 
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
+ 
   return (
     <main>
       <section id="product-form-section" className="dsc-container">
@@ -129,12 +133,19 @@ export default function ProductForm() {
               </div>
 
               <div>
-                <Select 
-                options={categories} 
-                isMulti
-                getOptionLabel={(obj) => obj.name}
-                getOptionValue= {(obj) => String(obj.id)}
-              />
+                <FormSelect
+                  {...formData.categories}
+                  options={categories}
+                  onChange={(obj: any) => {
+                    const newFormData = forms.update(formData, "categories", obj);
+                    console.log(newFormData.categories);
+                    setFormData(newFormData);
+                  }}
+                  onTurnDirty={handleTurnDirty}
+                  isMulti
+                  getOptionLabel={(obj: any) => obj.name}
+                  getOptionValue={(obj: any) => String(obj.id)}
+                />
               </div>
 
               <div>
