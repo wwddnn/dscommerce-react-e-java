@@ -1,13 +1,13 @@
-import Select from 'react-select';
+import Select from "react-select";
 
 export default function FormSelect(props: any) {
-
-  const { 
-    validation, 
-    invalid = "false", 
-    dirty = "false", 
-    onTurnDirty,  
-    ...selectProps 
+  const {
+    className,
+    validation,
+    invalid = "false",
+    dirty = "false",
+    onTurnDirty,
+    ...selectProps
   } = props;
 
   function handleBlur() {
@@ -15,11 +15,15 @@ export default function FormSelect(props: any) {
   }
 
   return (
+    <div 
+      className={className}
+      data-dirty={dirty} 
+      data-invalid={invalid}
+    >
       <Select 
         {...selectProps} 
-        onBlur={handleBlur}
-        data-dirty={dirty}
-        data-invalid={invalid} 
+        onBlur={handleBlur} 
       />
-  )
+    </div>
+  );
 }
