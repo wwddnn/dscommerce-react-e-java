@@ -8,6 +8,7 @@ import FormTextArea from "../../../components/FormTextArea";
 import type { CategoryDTO } from "../../../models/category";
 import * as categoryService from "../../../services/category";
 import FormSelect from "../../../components/FormSelect";
+import { selectStyles } from "../../../utils/select";
 
 export default function ProductForm() {
   const params = useParams();
@@ -135,7 +136,8 @@ export default function ProductForm() {
               <div>
                 <FormSelect
                   {...formData.categories}
-                  className="dsc-form-control"
+                  className="dsc-form-control dsc-form-select-container"
+                  styles={selectStyles}
                   options={categories}
                   onChange={(obj: any) => {
                     const newFormData = forms.updateAndValidate(formData, "categories", obj);
