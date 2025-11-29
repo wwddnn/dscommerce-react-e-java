@@ -8,7 +8,7 @@ import Searchbar from '../../../components/Searchbar';
 import DialogInfo from '../../../components/DialogInfo';
 import ButtonNextPage from '../../../components/ButtonNextPage';
 import DialogConfirmation from '../../../components/DialogConfirmation';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ButtonInverse from '../../../components/ButtonInverse';
 
 type QueryParams = {
@@ -17,6 +17,8 @@ type QueryParams = {
 }
 
 export default function ProductListing() {
+
+  const navigate = useNavigate();
 
   const [dialogInfoData, setDialogInfoData] = useState({
     visible: false,
@@ -58,6 +60,10 @@ export default function ProductListing() {
 
   function handleDialogInfoClose() {
     setDialogInfoData({...dialogInfoData, visible: false});
+  }
+
+  function handleUpdateClick(productId: number) {
+    navigate(`/admin/products/${productId}`);
   }
 
   function handleDeleteClick(productId: number) {
@@ -112,7 +118,7 @@ export default function ProductListing() {
                   <td><img className="dsc-product-listing-image" src={product.imgUrl} alt={product.name} /></td>
                   <td className="dsc-tb768">R$ {product.price.toFixed(2)}</td>
                   <td className="dsc-txt-left"> {product.name} </td>
-                  <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
+                  <td><img onClick={() => handleUpdateClick(product.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
                   <td><img onClick={() => handleDeleteClick(product.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
                 </tr>
               ))
