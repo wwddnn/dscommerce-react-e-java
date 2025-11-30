@@ -31,11 +31,22 @@ export function deleteById(id: number) {
     return requestBackend(config);
 }
 
-/* faz um put no banco de dados */
+/* salva dados atualizados com metodo PUT */
 export function updateRequest(obj: ProductDTO) {
     const config : AxiosRequestConfig = {
         method: "PUT",
         url: `/products/${obj.id}`,
+        withCredentials: true,
+        data: obj,
+    }
+    return requestBackend(config);
+} 
+
+/* insere dados novos com o metodo POST*/
+export function insertRequest(obj: ProductDTO) {
+    const config : AxiosRequestConfig = {
+        method: "POST",
+        url: "/products",
         withCredentials: true,
         data: obj,
     }

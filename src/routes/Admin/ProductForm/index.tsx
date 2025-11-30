@@ -11,7 +11,6 @@ import FormSelect from "../../../components/FormSelect";
 import { selectStyles } from "../../../utils/select";
 
 export default function ProductForm() {
-
   const navigate = useNavigate();
 
   const params = useParams();
@@ -69,7 +68,7 @@ export default function ProductForm() {
       validation: function (value: CategoryDTO[]) {
         return value.length > 0;
       },
-      message: "Escolha ao menos uma categoria"
+      message: "Escolha ao menos uma categoria",
     },
   });
 
@@ -112,13 +111,17 @@ export default function ProductForm() {
     if (isEditing) {
       requestBody.id = params.productId;
     }
-    
-    productService.updateRequest(requestBody)
+
+    const request = isEditing
+      ? productService.updateRequest(requestBody)
+      : productService.insertRequest(requestBody);
+
+    request
       .then(() => {
         navigate("/admin/products");
-      });
+    });
   }
- 
+
   return (
     <main>
       <section id="product-form-section" className="dsc-container">
@@ -163,7 +166,11 @@ export default function ProductForm() {
                   styles={selectStyles}
                   options={categories}
                   onChange={(obj: any) => {
-                    const newFormData = forms.updateAndValidate(formData, "categories", obj);
+                    const newFormData = forms.updateAndValidate(
+                      formData,
+                      "categories",
+                      obj
+                    );
                     setFormData(newFormData);
                   }}
                   onTurnDirty={handleTurnDirty}
@@ -171,7 +178,9 @@ export default function ProductForm() {
                   getOptionLabel={(obj: any) => obj.name}
                   getOptionValue={(obj: any) => String(obj.id)}
                 />
-                <div className="dsc-form-error">{formData.categories.message}</div>
+                <div className="dsc-form-error">
+                  {formData.categories.message}
+                </div>
               </div>
 
               <div>
