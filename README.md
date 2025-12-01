@@ -3,14 +3,48 @@
 - Com a utilização da lib de requisições AXIOS, é possível fazer requisições ao backend e dessa forma colaborar com a integração do frontend com o backend.
 
 ## ✅CONHECIMENTOS:
-- React: (frontend)
-  - Components
+- React: (frontend):
+  - Components React
   - Props
   - Router-DOM
   - Rotas, Links e Outlet
-  - Hooks ( useState e useEffect)
-- Java: (backend)
+  - Hooks ( useState, useEffect, useNavigate, useContext)
+  - LocalStorage
+  - Eventos e estado Global:
+     - Tratamento de eventos com onSearch
+     - Esado global com Context API
+  - Login e controle de acesso:
+  	- OAuth2 e Token JWT
+  	- Requisições de login (cabeçalho e corpo)
+  	- Salvar token no localStorage
+  	- Buscar usuário logado no back end
+  	- Criação do AxiosRequestConfig para requisições
+  	- Interceptors do Axios
+  	- Redirecionamento fora do componente JSX
+  	- Decodificação de token JWT para obter o payload do token
+  	- Função hasAnyRoles
+  	- Componente PrivateRoute para rotas privadas
+  	- Componente LoggedUser para o cabeçalho
+  - Forms em React:
+  	- Dialog modal de aviso e dialog modal de confirmação
+  	- Deletar um produto
+  	- Controle de formulário
+  	- Criação e edição no formulário	
+  	- Função UpdateAll para atualizar
+  	- Função validate
+  	- CSS para mostrar erros
+  	- Função toDirty para sujar o formulário
+  	- validações e expressões regulares regex
+  	- FormTextArea customizado
+  	- React Select
+  	- Atualizar produto existente com PUT
+  	- Inserir novo produto com POST
+  	- Capturar erros do backend para a tela de Login
+  	- Mostrar erro global na tela de Login
+     
+- Java: (backend):
   - Repositories, Services e Controller
+    
 - Postman: (testador de requisições)
 
 ## ↗️TECNOLOGIAS: 
