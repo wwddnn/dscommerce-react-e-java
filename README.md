@@ -1,6 +1,7 @@
 ## 🎯SOBRE O PROJETO:
-- Com frontend em React e o backend em Java, esse projeto cria um site de e-commerce chamado DSCommerce.
-- Com a utilização da lib de requisições AXIOS, é possível fazer requisições ao backend e dessa forma colaborar com a integração do frontend com o backend.
+- Projeto desenvolvido em REACT no front end, e com JAVA no back end.
+- O sistema refere-se a um e-commerce com o nome DSCOMMERCE.
+- Através do AXIOS é possível criar requisições ao back end e renderizar as respostas no front end.
 
 ## ✅CONHECIMENTOS:
 - React: (frontend):
@@ -9,6 +10,7 @@
   - Router-DOM
   - Rotas, Links e Outlet
   - Hooks ( useState, useEffect, useNavigate, useContext)
+  - AXIOS para requisições ao back end
   - LocalStorage
   - Eventos e estado Global:
      - Tratamento de eventos com onSearch
@@ -53,13 +55,28 @@
 ## 🤚DESENVOLVIDO POR:
 - Projeto com mentoria da escola Devsuperior
 
-## Prints:
-- <img width="1897" height="1005" alt="image" src="https://github.com/user-attachments/assets/e3bd9f5a-26ec-4c8e-b0eb-53227bf160d6" />
-<img width="1891" height="1007" alt="image" src="https://github.com/user-attachments/assets/0ee7eb58-1fdd-4792-84c6-fc9949cde0a5" />
-<img width="1887" height="993" alt="image" src="https://github.com/user-attachments/assets/6aa8fbd9-d6f2-4acb-9dba-d43bd926718d" />
-<img width="1898" height="1016" alt="image" src="https://github.com/user-attachments/assets/d9da2c2a-411a-42cd-82e8-84855ec6c39b" />
-<img width="1880" height="1008" alt="image" src="https://github.com/user-attachments/assets/6f07c7e9-e5e4-4421-9e37-79b17c74dd90" />
-<img width="1881" height="1024" alt="image" src="https://github.com/user-attachments/assets/e3e64d61-67a0-4a66-8d8d-d05f57c8ab0b" />
+## 💻 Prints:
+
+## Tela de Login CLIENT:
+<img width="1917" height="854" alt="image" src="https://github.com/user-attachments/assets/9488d603-9d8c-4ed5-9a54-a10affd1c36f" />  
+<img width="1879" height="864" alt="image" src="https://github.com/user-attachments/assets/ab861939-5744-43da-a6a6-9035f4175617" />
+<img width="1907" height="862" alt="image" src="https://github.com/user-attachments/assets/9ac33d7d-5234-4f3b-a121-0618c83dac44" />
+<img width="1908" height="863" alt="image" src="https://github.com/user-attachments/assets/cbc60a3f-2536-4939-a593-af5dd1d1371f" />
+
+## Tela de validação de formulários:
+<img width="1912" height="860" alt="image" src="https://github.com/user-attachments/assets/f93ce464-05f2-4ecd-a29a-514bec9f0924" />
+<img width="1875" height="852" alt="image" src="https://github.com/user-attachments/assets/73bd2cbf-a84b-4195-a310-70941867d978" />
+<img width="1892" height="855" alt="image" src="https://github.com/user-attachments/assets/44d5281e-3ad4-4957-8345-98115862eb5d" />
+
+
+## Tela de login ADMIN:
+<img width="1904" height="857" alt="image" src="https://github.com/user-attachments/assets/a7cc6615-e4c3-4b2d-9399-69cfee892424" />
+<img width="1888" height="859" alt="image" src="https://github.com/user-attachments/assets/2a4b822d-dff2-4fd9-857d-7a865afa94fb" />
+<img width="1880" height="844" alt="image" src="https://github.com/user-attachments/assets/1057d4cd-b1db-4339-b71d-7a4cdfdfa019" />
+<img width="1876" height="862" alt="image" src="https://github.com/user-attachments/assets/6bbf6f6c-e82a-4a43-a112-dedf8ff0a048" />
+
+
+
 
 
 
